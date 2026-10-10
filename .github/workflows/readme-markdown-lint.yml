@@ -1,0 +1,16 @@
+name: README Markdown lint
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npx --yes --package=markdownlint-cli@0.45.0 markdownlint --disable MD022 MD032 -- README.md
